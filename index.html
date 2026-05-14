@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的插画作品网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ff69b4;
+        }
+
+        /* 首页横幅 */
+        .hero {
+            background: linear-gradient(135deg, #ff69b4, #ff8fd4);
+            color: white;
+            padding: 5rem 10%;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #ff69b4;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,105,180,0.3);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* 关于我部分 */
+        .about {
+            padding: 5rem 10%;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #ff69b4;
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* 作品展示部分 */
+        .works {
+            padding: 5rem 10%;
+            background-color: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #ff69b4;
+        }
+
+        .works-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: #666;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .work-item {
+            background: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .work-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .work-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .work-content {
+            padding: 1.5rem;
+        }
+
+        .work-content h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .work-content p {
+            color: #666;
+        }
+
+        /* 擅长风格部分 */
+        .styles {
+            padding: 5rem 10%;
+            background-color: #f9f9f9;
+        }
+
+        .styles-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .style-item {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .style-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .style-item h3 {
+            margin-bottom: 1rem;
+            color: #ff69b4;
+        }
+
+        /* 联系我部分 */
+        .contact {
+            padding: 5rem 10%;
+            background: linear-gradient(135deg, #ff8fd4, #ff69b4);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .contact-info p {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+
+            .about {
+                flex-direction: column;
+            }
+
+            .about-image, .about-content {
+                flex: none;
+                width: 100%;
+            }
+
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">Canva 可画</div>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#works">作品</a></li>
+            <li><a href="#styles">擅长风格</a></li>
+            <li><a href="#contact">联系我</a></li>
+        </ul>
+    </nav>
+
+    <!-- 首页横幅 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>欢迎来到我的插画作品网站</h1>
+            我喜欢用色彩和形状，创造出独特的视觉效果
+            <a href="#works" class="btn">浏览作品</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1376&q=80" alt="插画师形象">
+        </div>
+    </section>
+
+    <!-- 关于我部分 -->
+    <section class="about" id="about">
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" alt="关于我">
+        </div>
+        <div class="about-content">
+            <h2>关于我</h2>
+            <h3>可小画</h3>
+            在此编辑个人简介，可以是教育经历，也可以是以往工作/项目经验
+            网站是一种沟通工具，就像布告栏一样，人们可以通过网站来发布自己想要公开的资讯，或者利用网站来提供相关的网络服务。
+            个人网站是指个人或团体因某种兴趣、拥有某种专业技术、提供某种服务或完成某种作品、商品展示销售而制作的具有独立空间域名的网站。
+            个人网站是整个网上网下团体的某种兴趣、拥有某种专业技术、提供某种服务或完成自己的作品、商品展示销售而制作的具有独立空间域名的网站。
+        </div>
+    </section>
+
+    <!-- 作品展示部分 -->
+    <section class="works" id="works">
+        <h2 class="section-title">在这里，可以浏览我的作品</h2>
+        <p class="works-intro">HERE, YOU CAN BROWSE MY WORKS
+        网站是一种沟通工具，就像布告栏一样，人们可以通过网站来发布自己想要公开的资讯，或者利用网站来提供相关的网络服务。
+        个人网站是指个人或团体因某种兴趣、拥有某种专业技术、提供某种服务或完成某种作品、商品展示销售而制作的具有独立空间域名的网站。
+        个人网站是整个网上网下团体的某种兴趣、拥有某种专业技术、提供某种服务或完成自己的作品、商品展示销售而制作的具有独立空间域名的网站。
+        <div class="works-grid">
+            <div class="work-item">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1377&q=80" alt="插画作品1" class="work-image">
+                <div class="work-content">
+                    <h3>山水风景插画</h3>
+                    在此输入作品名，年份
+                    网站是一种沟通工具，就像布告栏一样，人们可以通过网站来发布自己想要公开的资讯，或者利用网站来提供相关的网络服务。
+                    个人网站是指个人或团体因某种兴趣、拥有某种专业技术、提供某种服务或完成某种作品、商品展示销售而制作的具有独立空间域名的网站。
+                    个人网站是整个网上网下团体的某种兴趣、拥有某种专业技术、提供某种服务或完成自己的作品、商品展示销售而制作的具有独立空间域名的网站。
+                </div>
+            </div>
+            <div class="work-item">
+                <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80" alt="插画作品2" class="work-image">
+                <div class="work-content">
+                    <h3>抽象艺术插画</h3>
+                    在此输入作品名，年份
+                    网站是一种沟通工具，就像布告栏一样，人们可以通过网站来发布自己想要公开的资讯，或者利用网站来提供相关的网络服务。
+                    个人网站是指个人或团体因某种兴趣、拥有某种专业技术、提供某种服务或完成某种作品、商品展示销售而制作的具有独立空间域名的网站。
+                    个人网站是整个网上网下团体的某种兴趣、拥有某种专业技术、提供某种服务或完成自己的作品、商品展示销售而制作的具有独立空间域名的网站。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 擅长风格部分 -->
+    <section class="styles" id="styles">
+        <h2 class="section-title">擅长风格</h2>
+        <div class="styles-content">
+            <div class="style-item">
+                <img src="https://images.unsplash.com/photo-1519681393784-d120f9a5a5c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="风格1">
+                <h3>风格一</h3>
+                网站是一种沟通工具，就像布告栏一样，人们可以通过网站来发布自己想要公开的资讯，或者利用网站来提供相关的网络服务。
+                个人网站是指个人或团体因某种兴趣、拥有某种专业技术、提供某种服务或完成某种作品、商品展示销售而制作的具有独立空间域名的网站。
+                个人网站是整个网上网下团体的某种兴趣、拥有某种专业技术、提供某种服务或完成自己的作品、商品展示销售而制作的具有独立空间域名的网站。
+            </div>
+            <div class="style-item">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="风格2">
+                <h3>风格二</h3>
+                网站是一种沟通工具，就像布告栏一样，人们可以通过网站来发布自己想要公开的资讯，或者利用网站来提供相关的网络服务。
+                个人网站是指个人或团体因某种兴趣、拥有某种专业技术、提供某种服务或完成某种作品、商品展示销售而制作的具有独立空间域名的网站。
+                个人网站是整个网上网下团体的某种兴趣、拥有某种专业技术、提供某种服务或完成自己的作品、商品展示销售而制作的具有独立空间域名的网站。
+            </div>
+            <div class="style-item">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80" alt="风格3">
+                <h3>风格三</h3>
+                网站是一种沟通工具，就像布告栏一样，人们可以通过网站来发布自己想要公开的资讯，或者利用网站来提供相关的网络服务。
+                个人网站是指个人或团体因某种兴趣、拥有某种专业技术、提供某种服务或完成某种作品、商品展示销售而制作的具有独立空间域名的网站。
+                个人网站是整个网上网下团体的某种兴趣、拥有某种专业技术、提供某种服务或完成自己的作品、商品展示销售而制作的具有独立空间域名的网站。
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我部分 -->
+    <section class="contact" id="contact">
+        <h2>与我联系</h2>
+        <div class="contact-info">
+            电话：123-4567-8910
+            Email：cnsupport@canva.com
+            网站是一种沟通工具，就像布告栏一样，人们可以通过网站来发布自己想要公开的资讯，或者利用网站来提供相关的网络服务。
+            个人网站是指个人或团体因某种兴趣、拥有某种专业技术、提供某种服务或完成某种作品、商品展示销售而制作的具有独立空间域名的网站。
+            个人网站是整个网上网下团体的某种兴趣、拥有某种专业技术、提供某种服务或完成自己的作品、商品展示销售而制作的具有独立空间域名的网站。
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        © 2023 我的插画作品网站. All rights reserved.
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
